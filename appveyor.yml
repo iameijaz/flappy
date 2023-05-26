@@ -12,8 +12,23 @@ before_build:
   - set PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - python --version
   - python -m pip install --upgrade pip
-  - pip install numpy matplotlib pybullet opencv-python
+  - pip install numpy matplotlib pybullet opencv-python click
+  - pip install tensorflow-gpu==1.9
+
+  # Install DART from source
+  - git clone --depth 1 --branch v6.2.1 https://github.com/dartsim/dart.git
+  - cd dart
+  - mkdir build
+  - cd build
+  - cmake ..
+  - cmake --build . --config Release --target install
+  - cd ../..
+
+  # Install Flappy package
+  - git clone https://github.com/purdue-biorobotics/flappy.git
+  - cd flappy
+  - pip install -e .
+  - cd ..
 
 build_script:
   - python flappy.py
-
