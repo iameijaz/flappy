@@ -8,7 +8,14 @@ environment:
     - PYTHON: "C:\\Python39"
 
 before_build:
-  - ps: choco install python --version 3.9.6
+  # Download and install Python
+  - ps: |
+      $url = 'https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe'
+      $outfile = 'python-3.9.6-amd64.exe'
+      Invoke-WebRequest $url -OutFile $outfile
+      Start-Process -Wait -FilePath $outfile -ArgumentList '/quiet', 'InstallAllUsers=1', 'PrependPath=1', 'Include_test=0'
+      Remove-Item -Path $outfile
+
   - set PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - python --version
   - python -m pip install --upgrade pip
