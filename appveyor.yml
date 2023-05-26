@@ -18,9 +18,9 @@ before_build:
 
   - set PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - python --version
-  - pip install --upgrade pip==19.3.1
+  - pip install --upgrade pip
   - pip install numpy matplotlib pybullet opencv-python click
-  - pip install tensorflow-gpu==1.9
+  - pip install tensorflow-gpu==1.9.0
 
   # Install DART from source
   - git clone --depth 1 --branch v6.2.1 https://github.com/dartsim/dart.git
