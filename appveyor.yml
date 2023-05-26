@@ -1,0 +1,19 @@
+# appveyor.yml
+
+version: '{build}'
+image: Visual Studio 2019
+
+environment:
+  matrix:
+    - PYTHON: "C:\\Python39"
+
+before_build:
+  - ps: choco install python --version 3.9.6
+  - set PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
+  - python --version
+  - python -m pip install --upgrade pip
+  - pip install numpy matplotlib pybullet opencv-python
+
+build_script:
+  - python flappy.py
+
