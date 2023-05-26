@@ -1,12 +1,5 @@
 # appveyor.yml
 
-version: '{build}'
-image: Visual Studio 2019
-
-environment:
-  matrix:
-    - PYTHON: "C:\\Python39"
-
 before_build:
   # Download and install Python
   - ps: |
@@ -18,7 +11,7 @@ before_build:
 
   - set PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - python --version
-  - pip install --upgrade pip
+  - C:\Python39\python.exe -m pip install --upgrade pip==19.3.1
   - pip install numpy matplotlib pybullet opencv-python click
   - pip install tensorflow-gpu==1.9.0
 
@@ -36,6 +29,3 @@ before_build:
   - cd flappy
   - pip install -e .
   - cd ..
-
-build_script:
-  - python flappy.py
